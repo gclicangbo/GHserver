@@ -27,6 +27,12 @@ public class vip implements Serializable{
 		this.memdate = memdate;
 		this.memmode = memmode;
 	}
+	
+	public vip(int memnumber) {
+		super();
+		this.memnumber = memnumber;
+	}
+
 	public vip() {
 		super();
 	}

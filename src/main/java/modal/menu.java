@@ -12,6 +12,8 @@ public class menu implements Serializable{
 	private double price;
 	//菜系名
 	private String cuiname;
+	//规格
+	private double num;
 	public menu(int menuenumber, String dishes, double price, String cuiname) {
 		super();
 		this.menuenumber = menuenumber;
@@ -19,14 +21,26 @@ public class menu implements Serializable{
 		this.price = price;
 		this.cuiname = cuiname;
 	}
-	public menu(int menuenumber, String dishes, double price) {
+	public menu(int menuenumber, String dishes, double price, double num) {
 		super();
 		this.menuenumber = menuenumber;
 		this.dishes = dishes;
 		this.price = price;
+		this.num = num;
 	}
-
-
+	public menu(int menuenumber, String dishes, double price, String cuiname, double num) {
+		super();
+		this.menuenumber = menuenumber;
+		this.dishes = dishes;
+		this.price = price;
+		this.cuiname = cuiname;
+		this.num = num;
+	}
+	
+	public menu(String dishes) {
+		super();
+		this.dishes = dishes;
+	}
 	public menu() {
 		super();
 	}
@@ -54,6 +68,13 @@ public class menu implements Serializable{
 	public void setCuiname(String cuiname) {
 		this.cuiname = cuiname;
 	}
+	public double getNum() {
+		return num;
+	}
+	public void setNum(double num) {
+		this.num = num;
+	}
+	
 	
 	
 }

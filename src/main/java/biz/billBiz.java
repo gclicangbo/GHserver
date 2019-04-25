@@ -16,4 +16,8 @@ public interface billBiz {
 		public double amountall(String bilnumber);
 		//将点菜内容放进表中
 		public String adddishes(String bilnumber,int memnumber,String dishes,double memamount);
+		//插入表中
+		public String addBills(String bilnumber,Date d,double bilcost);
+		//查看所有会员用餐情况
+		public List<bill> print();
 }

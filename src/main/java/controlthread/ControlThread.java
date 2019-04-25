@@ -38,7 +38,7 @@ public class ControlThread implements Runnable {
 					oos.flush();
 				}catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("用户"+client.getInetAddress().getHostAddress()+"已断开");
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

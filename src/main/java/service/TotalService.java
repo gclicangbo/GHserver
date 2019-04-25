@@ -41,6 +41,10 @@ public interface TotalService {
 	public double amountall(String bilnumber);
 	//将点菜内容放进表中
 	public String adddishes(String bilnumber,int memnumber,String dishes,double memamount);
+	//插入表中
+	public String addBills(String bilnumber,Date d,double bilcost);
+	//查看所有会员用餐情况
+	public List<bill> print();
 	
 	//添加会员(办卡)
 	public String addvip(vip v);
@@ -50,6 +54,12 @@ public interface TotalService {
 	public vip selectByphone(String phonum);
 	//冻结账号
 	public String Freezacc(String memname, String memphone);
+	//解封帐号
+	public String jf(String memname,String memphone);
 	//返回扣值信息
-	public String deduct(int memnumber,double factprcie);
+	public String deduct(String phonum,double factprcie);
+	//返回充值信息
+	public String increase(String phonum,double money,Date d);
+	//返回删卡信息
+	public String deletecard(String phonum);
 }

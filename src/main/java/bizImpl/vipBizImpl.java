@@ -1,5 +1,6 @@
 package bizImpl;
 
+import java.sql.Date;
 import java.util.List;
 
 import biz.vipBiz;
@@ -28,9 +29,9 @@ public class vipBizImpl implements vipBiz{
 	}
 
 	@Override
-	public vip selectById(String phonum) {
+	public vip selectByphone(String phonum) {
 		// TODO Auto-generated method stub
-		return this.vd.selectById(phonum);
+		return this.vd.selectByphone(phonum);
 	}
 
 	@Override
@@ -40,9 +41,27 @@ public class vipBizImpl implements vipBiz{
 	}
 
 	@Override
-	public String deduct(int memnumber, double factprcie) {
+	public String deduct(String phonum, double factprcie) {
 		// TODO Auto-generated method stub
-		return this.vd.deduct(memnumber, factprcie)?"扣除成功":"扣除失败";
+		return this.vd.deduct(phonum, factprcie)?"扣除成功":"扣除失败";
+	}
+
+	@Override
+	public String increase(String phonum, double money, Date d) {
+		// TODO Auto-generated method stub
+		return this.vd.increase(phonum, money, d)?"充值成功":"充值失败";
+	}
+
+	@Override
+	public String deletecard(String phonum) {
+		// TODO Auto-generated method stub
+		return this.vd.deletecard(phonum)?"删除成功":"删除失败";
+	}
+
+	@Override
+	public String jf(String memname, String memphone) {
+		// TODO Auto-generated method stub
+		return this.vd.jf(memname, memphone)?"解除成功":"解除失败";
 	}
 
 	

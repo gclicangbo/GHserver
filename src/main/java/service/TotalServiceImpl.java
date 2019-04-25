@@ -107,6 +107,16 @@ public class TotalServiceImpl implements TotalService {
 		// TODO Auto-generated method stub
 		return this.bbz.adddishes(bilnumber, memnumber, dishes, memamount);
 	}
+	@Override
+	public String addBills(String bilnumber, Date d, double bilcost) {
+		// TODO Auto-generated method stub
+		return this.bbz.addBills(bilnumber, d, bilcost);
+	}
+	@Override
+	public List<bill> print() {
+		// TODO Auto-generated method stub
+		return this.bbz.print();
+	}
 	
 	
 	@Override
@@ -122,7 +132,7 @@ public class TotalServiceImpl implements TotalService {
 	@Override
 	public vip selectByphone(String phonum) {
 		// TODO Auto-generated method stub
-		return this.vbz.selectById(phonum);
+		return this.vbz.selectByphone(phonum);
 	}
 	@Override
 	public String Freezacc(String memname, String memphone) {
@@ -130,10 +140,28 @@ public class TotalServiceImpl implements TotalService {
 		return this.vbz.Freezacc(memname, memphone);
 	}
 	@Override
-	public String deduct(int memnumber, double factprcie) {
+	public String jf(String memname, String memphone) {
 		// TODO Auto-generated method stub
-		return this.vbz.deduct(memnumber, factprcie);
+		return this.vbz.jf(memname, memphone);
 	}
+	@Override
+	public String deduct(String phonum, double factprcie) {
+		// TODO Auto-generated method stub
+		return this.vbz.deduct(phonum, factprcie);
+	}
+	@Override
+	public String increase(String phonum, double money, Date d) {
+		// TODO Auto-generated method stub
+		return this.vbz.increase(phonum, money, d);
+	}
+	@Override
+	public String deletecard(String phonum) {
+		// TODO Auto-generated method stub
+		return this.vbz.deletecard(phonum);
+	}
+	
+	
+	
 	
 	
 	

@@ -46,6 +46,7 @@ public class Control {
 				System.out.println("当前活跃人数是"+count);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				
 			}
 		}
 	}

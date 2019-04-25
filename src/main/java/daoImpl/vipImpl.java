@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class vipImpl implements vipDao{
 		 return null;
 	}
 
-	public vip selectById(String phonum) {
+	public vip selectByphone(String phonum) {
 		//实例化DBUtil()
 		this.db=new DBUtil();
 		//创建sql语句
@@ -62,7 +63,8 @@ public class vipImpl implements vipDao{
 		}
 		return null;
 	}
-	//根据姓名手机号冻结
+	
+	//根据姓名手机号冻结或者解封
 	@Override
 	public boolean Freezacc(String memname, String memphone) {
 		//实例化DBUtil()
@@ -82,22 +84,42 @@ public class vipImpl implements vipDao{
 		}
 		return false;
 	}
+
+	@Override
+	public boolean jf(String memname, String memphone) {
+		// 实例化DBUtil()
+		this.db = new DBUtil();
+		// 创建sql语句
+		String sql = "select * from MemberTable where memname=?and memphone=?";
+		try {
+			ResultSet rs = this.db.query(sql, memname, memphone);
+			if (rs.next()) {
+				String sql2 = "update MemberTable set memmode=1";
+				int i = this.db.update(sql2);
+				return i > 0;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
+		return false;
+	}
 	//扣除金额
 	@Override
-	public boolean deduct(int memnumber,double factprcie) {
+	public boolean deduct(String phonum,double factprcie) {
 		//实例化DBUtil()
 		this.db=new DBUtil();
 		//创建sql语句
-		String sql="select membalance from MemberTable where memnumber=?";
+		String sql="select membalance from MemberTable where memphone=?";
 		//创建临时变量存储余额
 		double a;
 		try {
-			ResultSet rs = this.db.query(sql, memnumber);
+			ResultSet rs = this.db.query(sql, phonum);
 			if(rs.next()){
 				if(rs.getDouble("membalance")>factprcie){
 					a=rs.getDouble("membalance")-factprcie;
-					String sql2="update MemberTable set membalance=? where memnumber=?";
-					int i = this.db.update(sql2,a,memnumber);
+					String sql2="update MemberTable set membalance=? where memphone=?";
+					int i = this.db.update(sql2,a,phonum);
 					return i>0;
 				}
 			}
@@ -107,6 +129,48 @@ public class vipImpl implements vipDao{
 		}
 		return false;
 	}
+	//充值金额
+	@Override
+	public boolean increase(String phonum, double money,Date d) {
+		//实例化DBUtil()
+		this.db=new DBUtil();
+		//创建sql语句
+		String sql="select membalance from MemberTable where memphone=?";
+		//创建临时变量存储余额
+		double a;
+		try {
+			ResultSet rs = this.db.query(sql, phonum);
+			if(rs.next()){
+				a=rs.getDouble("membalance")+money;
+				String sql2="update MemberTable set (membalance,memdate)=(select ?,? from dual) where memphone=?";
+				int i = this.db.update(sql2,a,d,phonum);
+				return i>0;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	//删除会员卡
+	@Override
+	public boolean deletecard(String phonum) {
+		//实例化DBUtil()
+		this.db=new DBUtil();
+		//创建sql语句
+		String sql="delete  from MemberTable where memphone=?";
+		try {
+			int i = this.db.update(sql,phonum);
+			return i>0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 
 
 
